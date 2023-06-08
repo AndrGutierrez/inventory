@@ -1,22 +1,17 @@
 #include "Client.h"
+#include <cstring>
 
-Client::Client() : id(0), name("") {}
 
-Client::Client(int id, const std::string& name) : id(id), name(name) {}
+Client::Client(int id, char* nombre): Table(id) {
+	strcpy(this->nombre,nombre);
 
-int Client::getId() const {
-    return id;
 }
 
-void Client::setId(int id) {
-    this->id = id;
+
+char* Client::getNombre() {
+    return nombre;
 }
 
-std::string Client::getName() const {
-    return name;
+void Client::setNombre(char* nombre) {
+	strcpy(this->nombre,nombre);
 }
-
-void Client::setName(const std::string& name) {
-    this->name = name;
-}
-

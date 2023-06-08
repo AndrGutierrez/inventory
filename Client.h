@@ -2,21 +2,18 @@
 #define CLIENT_H
 
 #include <string>
+#include "Table.h"
 
-class Client {
+class Client: public Table {
 	private:
 		int id;
-		std::string name;
+		char nombre[45];
 
 	public:
-		Client();
-		Client(int id, const std::string& name);
+		Client(int id, char* nombre);
 
-		int getId() const;
-		void setId(int id);
-
-		std::string getName() const;
-		void setName(const std::string& name);
+		char* getNombre();
+		void setNombre(char* nombre);
 };
 
 #endif
