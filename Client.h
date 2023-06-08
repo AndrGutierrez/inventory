@@ -23,8 +23,9 @@ class Client: public Table {
 		char* getTelefono();
 		void setNombre(char* nombre);
 		void storeInDB();
-		void writePerson(const std::string& filename, const Client& person);
-
+		void write(const std::string& filename, const Client& person);
+		void read();
+		char* getById(const std::string& filename);
 };
 
 

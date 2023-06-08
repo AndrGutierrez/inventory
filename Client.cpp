@@ -25,7 +25,7 @@ char* Client::getTelefono() {
 void Client::setNombre(char* nombre) {
 	strcpy(this->nombre,nombre);
 }
-void Client::writePerson(const std::string& filename, const Client& person) {
+void Client::write(const std::string& filename, const Client& person) {
 	fstream outFile(filename, std::ios::binary | std::ios::app);
 
     if (!outFile) {
@@ -40,7 +40,13 @@ void Client::writePerson(const std::string& filename, const Client& person) {
 void Client::storeInDB() {
 	Client* newClient = this;
     std::string filename = "db/people.dat";
-    writePerson(filename, *newClient);
+    write(filename, *newClient);
+
+    std::cout << "New record added to the file." << std::endl;
+}
+
+void Client::read(){
+
 	std::fstream arc;
 	Client* buf = this;
 	arc.open("db/people.dat",ios::binary | ios::in);
@@ -52,7 +58,16 @@ void Client::storeInDB() {
         printf("\n");
     }
     arc.close();
-
-    std::cout << "New record added to the file." << std::endl;
 }
 
+char* Client::getById(const std::string& filename) {
+    std::ifstream in(filename, std::ios::binary);
+    Client* client=this;
+    while (in.read((char*)client, sizeof(Client))) {
+        if (client->getId() == 2) {
+            std::cout << "ID: " << client->getId() << ", Name: " << client->getNombre() << std::endl;
+        }
+    }
+    in.close();
+	return this->nombre;
+}
