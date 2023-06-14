@@ -1,4 +1,5 @@
 #include "User.h"
+#include "DBConnection.h"
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -28,43 +29,49 @@ int User::getRole() {
 void User::setName(char* name) {
         strcpy(this->name,name);
 }
-void User::write(const User& user) {
-        fstream outFile(DBFile, std::ios::binary | std::ios::app);
+void User::write(int id, char* name, char* password, int role) {
+    fstream outFile(DBFile, std::ios::binary | std::ios::app);
 
     if (!outFile) {
         std::cerr << "File could not be opened." << std::endl;
         return;
     }
 
-    outFile.write(reinterpret_cast<const char*>(&user), sizeof(User));
+
+	// char empty[1]="";
+	// User* usernew=new User(0, "sdf", "sdf", 0);
+
+    // outFile.write((char*)usernew, sizeof(User));
+	User users[]={{id, name, password, role}};
+    outFile.write((char*)users, sizeof(User));
+    // outFile.write(reinterpret_cast<const char*>(&user), sizeof(User));
     outFile.close();
 }
 
-void User::storeInDB() {
+void User::storeInDB(int id, char* name, char* password, int role) {
     User* newClient = this;
-    write(*newClient);
+    write(id, name, password, role);
 
     std::cout << "New record added to the file." << std::endl;
 }
 
 void User::read(){
 
-	std::fstream arc;
-	User* buf = this;
+	fstream arc;
+	User buf;
 	arc.open(DBFile,ios::binary | ios::in);
     while (true)
     {
-        arc.read((char *)buf,sizeof(*buf));
+        arc.read((char *)&buf,sizeof(buf));
         if (arc.eof()) break;
-        printf("%s %d", buf->getName(), buf->getId());
-        printf("\n");
+        printf("%s %d \n", buf.getName(), buf.getId());
     }
     arc.close();
 }
 
 char* User::getById(int id) {
-std::ifstream in(DBFile, std::ios::binary);
-User* user=this;
+	std::ifstream in(DBFile, std::ios::binary);
+	User* user=this;
     while (in.read((char*)user, sizeof(User))) {
         if (user->getId() == id) {
             std::cout << "ID: " << user->getId() << ", Name: " << user->getName() << std::endl;
@@ -74,15 +81,20 @@ User* user=this;
     return this->name;
 }
 
-char* User::getByName(char* name) {
-    std::ifstream in(DBFile, std::ios::binary);
-    User* user=this;
-	int userNameMatches = strcmp(user->getName(), name);
-	while (in.read((char*)user, sizeof(User))) {
-		if (userNameMatches == 0) {
-			std::cout << "ID: " << user->getId() << ", Name: " << user->getName() << std::endl;
+
+void User::login(char* inputName, char* inputPassword){
+	DBConnection* connection = new DBConnection();
+		User* user = connection->getUserByName(inputName);
+		if(user != NULL){
+			int passwordsMatch = strcmp(user->getPassword(), inputPassword);
+			if(passwordsMatch==0){
+				printf("WAOS");
+			}
 		}
-	}
-    in.close();
-    return this->name;
+
+		else {
+			printf("User not found or password incorrect");
+			// std::cerr << e.what() << '\n';
+		}
+
 }
