@@ -83,8 +83,8 @@ char* User::getById(int id) {
 
 
 void User::login(char* inputName, char* inputPassword){
-	DBConnection* connection = new DBConnection();
-		User* user = connection->getUserByName(inputName);
+		DBConnection<User> connection;
+		User* user = connection.getUserByName(inputName);
 		if(user != NULL){
 			int passwordsMatch = strcmp(user->getPassword(), inputPassword);
 			if(passwordsMatch==0){

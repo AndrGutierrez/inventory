@@ -8,7 +8,11 @@ class Inventory{
 	public: 
 		void run(){
 			// login();
-			signup();
+			// signup();
+			DBConnection<User> connection= DBConnection<User>();
+			User table= connection.getById(4);
+			printf("%s", table.getName());
+
 		}
 		void signup(){
 
@@ -22,7 +26,7 @@ class Inventory{
 			std::cout << "Enter your password: ";
 		    std::cin.getline(password, sizeof(password));
 
-			DBConnection connection;	
+			DBConnection<User> connection;	
 			User users[]={{id, name, password, 1}};
 			while(connection.getUserById(id)!=NULL){
 				id++;
@@ -48,7 +52,5 @@ class Inventory{
 			User* user = new User(1, name, password, 1);
 			// user->read();
 			user->login(name, password);
-			
-		
 		}
 };
