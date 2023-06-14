@@ -10,8 +10,12 @@ class Inventory{
 			// login();
 			// signup();
 			DBConnection<User> connection= DBConnection<User>();
-			User table= connection.getById(4);
-			printf("%s", table.getName());
+			// User table= connection.getById(3);
+			string DBFile="db/users.dat";
+			// connection.storeInDB(DBFile, table);
+			// table.read();
+			signup();
+			connection.selectAll(DBFile);
 
 		}
 		void signup(){
@@ -26,18 +30,18 @@ class Inventory{
 			std::cout << "Enter your password: ";
 		    std::cin.getline(password, sizeof(password));
 
-			DBConnection<User> connection;	
-			User users[]={{id, name, password, 1}};
+			DBConnection<User> connection=DBConnection<User>();
+			User* user=new User(id, name, password, 1);
 			while(connection.getUserById(id)!=NULL){
 				id++;
 			}
-			users->storeInDB(id, name, password, 1);
+			string DBFile="db/users.dat";
+			connection.storeInDB(DBFile, *user);
 			// 
 			// printf("%d", id);
 			// User* user = new User(id, name, password, 1);
 			// user->getById(id);
 			// user->storeInDB();
-			users->read();
 		}
 		void login(){
 		    char name[45];

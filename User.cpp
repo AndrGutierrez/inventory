@@ -30,26 +30,19 @@ void User::setName(char* name) {
         strcpy(this->name,name);
 }
 void User::write(int id, char* name, char* password, int role) {
-    fstream outFile(DBFile, std::ios::binary | std::ios::app);
+    fstream outFile(DBFile, ios::binary | ios::app);
 
     if (!outFile) {
         std::cerr << "File could not be opened." << std::endl;
         return;
     }
 
-
-	// char empty[1]="";
-	// User* usernew=new User(0, "sdf", "sdf", 0);
-
-    // outFile.write((char*)usernew, sizeof(User));
 	User users[]={{id, name, password, role}};
     outFile.write((char*)users, sizeof(User));
-    // outFile.write(reinterpret_cast<const char*>(&user), sizeof(User));
     outFile.close();
 }
 
 void User::storeInDB(int id, char* name, char* password, int role) {
-    User* newClient = this;
     write(id, name, password, role);
 
     std::cout << "New record added to the file." << std::endl;
