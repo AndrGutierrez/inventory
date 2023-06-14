@@ -91,3 +91,6 @@ void User::login(char* inputName, char* inputPassword){
 		}
 
 }
+void User::print(){
+	printf("%s %d \n", this->getName(), this->getId());
+}

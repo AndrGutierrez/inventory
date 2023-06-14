@@ -16,6 +16,7 @@ class Inventory{
 			// table.read();
 			signup();
 			connection.selectAll(DBFile);
+			// connection.getLastItemId(DBFile);
 
 		}
 		void signup(){
@@ -23,7 +24,7 @@ class Inventory{
 		    char name[45];
 			char password[128];
 			int age;
-			int id=1;
+			string DBFile="db/users.dat";
 			std::cout << "Enter your name: ";
 		    std::cin.getline(name, sizeof(name));
 
@@ -31,17 +32,9 @@ class Inventory{
 		    std::cin.getline(password, sizeof(password));
 
 			DBConnection<User> connection=DBConnection<User>();
+			int id=connection.getLastItemId(DBFile)+1;
 			User* user=new User(id, name, password, 1);
-			while(connection.getUserById(id)!=NULL){
-				id++;
-			}
-			string DBFile="db/users.dat";
 			connection.storeInDB(DBFile, *user);
-			// 
-			// printf("%d", id);
-			// User* user = new User(id, name, password, 1);
-			// user->getById(id);
-			// user->storeInDB();
 		}
 		void login(){
 		    char name[45];
@@ -52,9 +45,7 @@ class Inventory{
 
 			strcpy(password, "password");
 
-		
 			User* user = new User(1, name, password, 1);
-			// user->read();
 			user->login(name, password);
 		}
 };
