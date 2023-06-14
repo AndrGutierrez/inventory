@@ -3,20 +3,22 @@
 #include <iostream>
 #include "Client.h"
 #include "User.h"
+#include "Provider.h"
 #include "DBConnection.h"
 class Inventory{
 	public: 
 		void run(){
-			// login();
-			// signup();
-			DBConnection<User> connection= DBConnection<User>();
+			// DBConnection<User> connection= DBConnection<User>();
+			DBConnection<Provider> connection= DBConnection<Provider>();
 			// User table= connection.getById(3);
-			string DBFile="db/users.dat";
+			// string DBFile="db/users.dat";
 			// connection.storeInDB(DBFile, table);
 			// table.read();
-			signup();
-			connection.selectAll(DBFile);
+			// signup();
+			// connection.selectAll(DBFile);
 			// connection.getLastItemId(DBFile);
+			// createProvider();
+			connection.selectAll("db/provider.dat");
 
 		}
 		void signup(){
@@ -47,5 +49,16 @@ class Inventory{
 
 			User* user = new User(1, name, password, 1);
 			user->login(name, password);
+		}
+		void createProvider(){
+
+		    char name[45]={"proveedor 1"};
+			char phone[70]={"fasd"};
+			string DBFile="db/provider.dat";
+
+			DBConnection<Provider> connection=DBConnection<Provider>();
+			int id=connection.getLastItemId(DBFile)+1;
+			Provider* provider=new Provider(id, name, phone);
+			connection.storeInDB(DBFile, *provider);
 		}
 };
