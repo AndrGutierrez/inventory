@@ -8,8 +8,8 @@
 class Inventory{
 	public: 
 		void run(){
-			// DBConnection<User> connection= DBConnection<User>();
-			DBConnection<Provider> connection= DBConnection<Provider>();
+			DBConnection<User> connection= DBConnection<User>();
+			// DBConnection<Provider> connection= DBConnection<Provider>();
 			// User table= connection.getById(3);
 			// string DBFile="db/users.dat";
 			// connection.storeInDB(DBFile, table);
@@ -18,7 +18,13 @@ class Inventory{
 			// connection.selectAll(DBFile);
 			// connection.getLastItemId(DBFile);
 			// createProvider();
-			connection.selectAll("db/provider.dat");
+			// connection.selectAll("db/provider.dat");
+			// connection.deleteRecord("db/users.dat", 0);
+			char name[45] = "name";
+			char password[128] = "password";
+			User user= User(1, name, password, 1);
+			connection.updateRecord("db/users.dat", 0, user);
+			connection.selectAll("./db/users.dat");
 
 		}
 		void signup(){
