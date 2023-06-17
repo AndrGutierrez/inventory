@@ -71,3 +71,7 @@ char* Client::getById(const std::string& filename) {
     in.close();
 	return this->nombre;
 }
+void Client::print(){
+	printf("%s %d \n", this->getNombre(), this->getId());
+
+}

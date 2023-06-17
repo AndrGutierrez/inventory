@@ -16,6 +16,7 @@ class Client: public Table {
 		char telefono[18];
 
 	public:
+		Client(){};
 		Client(int id, char* nombre, char* direccion, char* telefono);
 
 		char* getNombre();
@@ -26,6 +27,7 @@ class Client: public Table {
 		void write(const std::string& filename, const Client& person);
 		void read();
 		char* getById(const std::string& filename);
+		void print();
 };
 
 
