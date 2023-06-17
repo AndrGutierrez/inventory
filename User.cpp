@@ -12,6 +12,7 @@ User::User(int id, char* name, char* password, int role): Table(id) {
     strcpy(this->name,name);
     strcpy(this->password,password);
 	this->role = role;
+	// this->fields[0]="id";
 
 }
 
@@ -42,8 +43,7 @@ void User::write(int id, char* name, char* password, int role) {
     outFile.close();
 }
 
-void User::storeInDB(int id, char* name, char* password, int role) {
-    write(id, name, password, role);
+void User::storeInDB(int id, char* name, char* password, int role) { write(id, name, password, role);
 
     std::cout << "New record added to the file." << std::endl;
 }
@@ -91,6 +91,10 @@ void User::login(char* inputName, char* inputPassword){
 		}
 
 }
-void User::print(){
-	printf("%s %d \n", this->getName(), this->getId());
+string User::print(){
+	// printf("%s %d \n", this->getName(), this->getId());
+	string space="	";
+	string data = this->getName() + space + to_string(this->getId());
+	return data;
 }
+//

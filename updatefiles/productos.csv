@@ -1,0 +1,3 @@
+id,id_proveedor,stock,precio,descripcion,stock_min
+1,2,10,1.2,"producto interesante",5				
+2,3,15,4.5,"lampara",10				

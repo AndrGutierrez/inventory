@@ -6,10 +6,14 @@
 #include "Provider.h"
 #include "DBConnection.h"
 #include "Producto.h"
+
+#define GET_VARIABLE_NAME(Variable) (#Variable)
+
 class Inventory{
 	public: 
 		void run(){
 			DBConnection<User> connection= DBConnection<User>();
+			DBConnection<Producto> productConnection= DBConnection<Producto>();
 			// DBConnection<Provider> connection= DBConnection<Provider>();
 			// User table= connection.getById(3);
 			// string DBFile="db/users.dat";
@@ -26,10 +30,18 @@ class Inventory{
 			// User user= User(1, name, password, 1);
 			// connection.updateRecord("db/users.dat", 0, user);
 			// connection.selectAll("./db/users.dat");
-			int userRole=0;
+			int userRole=3;
+
+			// productConnection.readCSV(1);
+			
+			// char descripcion[45] = "description";
+			// Producto product= {1, 1, 1, 1, descripcion, 1};
+			// productConnection.storeInDB("./db/productos.dat", product);
+			productConnection.selectAll("./db/productos.dat");
+
+
 			if(userRole==0){
 				adminFlow();
-
 			}
 			else if (userRole==1){
 				sellerFlow();
@@ -39,6 +51,9 @@ class Inventory{
 		    }
 
 		}
+
+
+
 		void signup(){
 
 		    char name[45];
@@ -121,10 +136,16 @@ class Inventory{
 		}
 
 		void adminFlow(){
-
+			
+			
 		}
 
 		void personalFlow(){
+			char nombre_archivo[24];
+			cout << "Nombre: ";
+			cin.ignore();
+			cin.getline(nombre_archivo, sizeof(nombre_archivo));
+			DBConnection<User> connection= DBConnection<User>();
 
 		}
 	
