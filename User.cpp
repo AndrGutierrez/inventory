@@ -12,16 +12,15 @@ User::User(int id, char* name, char* password, int role): Table(id) {
     strcpy(this->name,name);
     strcpy(this->password,password);
 	this->role = role;
-	// this->fields[0]="id";
 
 }
 
 
 char* User::getName() {
-    return name;
+    return this->name;
 }
 char* User::getPassword() {
-        return password;
+        return this->password;
 }
 
 int User::getRole() {
@@ -75,26 +74,27 @@ char* User::getById(int id) {
 }
 
 
-void User::login(char* inputName, char* inputPassword){
+bool User::login(char* inputName, char* inputPassword){
 		DBConnection<User> connection;
-		User* user = connection.getUserByName(inputName);
-		if(user != NULL){
-			int passwordsMatch = strcmp(user->getPassword(), inputPassword);
+		User user = connection.getUserByName(inputName);
+		int usersMatch = strcmp(user.getName(), inputName);
+		if(usersMatch==0){
+			int passwordsMatch = strcmp(user.getPassword(), inputPassword);
 			if(passwordsMatch==0){
-				printf("WAOS");
+				return true;
 			}
 		}
 
-		else {
-			printf("User not found or password incorrect");
-			// std::cerr << e.what() << '\n';
-		}
+		printf("******************************************************************* \n");
+		printf("* Usuario no encontrado o contrasena incorrecta, intente de nuevo *\n");
+		printf("******************************************************************* \n");
+		return false;
 
 }
 string User::print(){
 	// printf("%s %d \n", this->getName(), this->getId());
-	string space="	";
-	string data = this->getName() + space + to_string(this->getId());
+	string data = to_string(this->getId()) + " " + this->getName() + " " + this->getPassword()+" " + to_string(this->getRole());
+	// printf("\n nombre: %s \n", this->getName());
+	printf("%s \n", data.c_str());
 	return data;
 }
-//

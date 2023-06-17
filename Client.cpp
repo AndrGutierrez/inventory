@@ -71,7 +71,9 @@ char* Client::getById(const std::string& filename) {
     in.close();
 	return this->nombre;
 }
-void Client::print(){
-	printf("%s %d \n", this->getNombre(), this->getId());
+string Client::print(){
+	string data = to_string(this->getId()) + " " + this->getNombre() + " " + this->getDireccion() + " " + this->getTelefono();
+	printf("%s \n", data.c_str());
+	return data;
 
 }

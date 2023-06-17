@@ -4,12 +4,18 @@
 #include <iostream>
 #include <string>
 #include "Provider.h"
+using namespace std;
 
 Provider::Provider(int id, char* nombre, char* telefono):Table(id){
 			this->id=id;
 			strcpy(this->nombre,nombre);
 			strcpy(this->telefono,telefono);
 }
-void Provider::print(){
-	printf("%d %s %s\n", id, nombre, telefono);
+string Provider::print(){
+	string data= to_string(id) + " " + nombre + " " + telefono;
+	printf("%s",data.c_str());
+	return data;
+}
+int Provider::getId(){
+	return this->id;
 }

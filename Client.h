@@ -27,7 +27,7 @@ class Client: public Table {
 		void write(const std::string& filename, const Client& person);
 		void read();
 		char* getById(const std::string& filename);
-		void print();
+		string print();
 };
 
 
