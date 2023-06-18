@@ -14,6 +14,5 @@ int Factura::getId(){
 }
 string Factura::print(){
 	string data=to_string(this->id) +" " + to_string(this->idCliente) +" "+this->fecha;
-	printf("%s\n", data.c_str());
 	return data;
 }

@@ -13,7 +13,6 @@ Provider::Provider(int id, char* nombre, char* telefono):Table(id){
 }
 string Provider::print(){
 	string data= to_string(id) + " " + nombre + " " + telefono;
-	printf("%s",data.c_str());
 	return data;
 }
 int Provider::getId(){

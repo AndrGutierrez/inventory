@@ -10,6 +10,7 @@
 #include "Personal.h"
 #include "Factura.h"
 #include "Compra.h"
+#include "Admin.h"
 
 #define GET_VARIABLE_NAME(Variable) (#Variable)
 
@@ -43,11 +44,12 @@ class Inventory{
 			int userRole=user.getRole();
 			Seller seller;
 			Personal personal;
+			Admin admin;
 			
 
 			
 			if(userRole==0){
-				adminFlow();
+				admin.flow();
 			}
 			else if (userRole==1){
 				seller.flow();

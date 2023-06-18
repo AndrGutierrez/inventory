@@ -13,7 +13,6 @@ Producto::Producto(int id, int id_proveedor, int stock, float precio, char* desc
 }
 string Producto::print(){
 	string data = to_string(this->id) + " " + to_string(this->id_proveedor) + " " + to_string(this->stock) + " " + to_string(this->precio) + " " + this->descripcion + " " + to_string(this->stock_min);
-	printf("%s \n", data.c_str());
 	return data;
 
 }
