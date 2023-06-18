@@ -20,3 +20,9 @@ string Producto::print(){
 int Producto::getId(){
 	return this->id;
 }
+int Producto::getStock(){
+	return this->stock;
+}
+void Producto::setStock(int stock){
+	this->stock= stock;
+}
