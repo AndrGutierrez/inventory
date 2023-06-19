@@ -1,2 +1,4 @@
 id,id_proveedor,stock,precio,descripcion,stock_min
-2,3,15,4.5,"lampara",10				
+2,1,15,4.5,"lampara",10				
+3,1,30,50,"mueble",5
+4,1,30,500,"laptop",3

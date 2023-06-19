@@ -21,7 +21,6 @@ class Inventory{
 			// User user={1, "admin", "admin", 0};
 			// connection.storeInDB("./db/users.dat", user);
 			// signup();
-			connection.selectAll("./db/users.dat");
 			// DBConnection<Producto> productConnection=DBConnection<Producto>();
 			// productConnection.selectAll("./db/product.dat");
 			 User user= welcome();	
@@ -45,18 +44,42 @@ class Inventory{
 			Seller seller;
 			Personal personal;
 			Admin admin;
+			int option;
 			
 
 			
-			if(userRole==0){
-				admin.flow();
+			bool finished=false;
+			int install;
+			cout << "Desea crear una base de datos de prueba \n (Recomendado para el correcto funcionamiento de instalaciones nuevas): \n";
+			cout << "1. Si \n2. No \nSeleccione: ";
+			cin >> install;
+			if(install==1){
+				cargarDatosDePrueba();
 			}
-			else if (userRole==1){
-				seller.flow();
+			
+			while(!finished){	
+				if(userRole==0){
+					admin.flow();
+				}
+				else if (userRole==1){
+					seller.flow();
+				}
+				else if(userRole==2){
+					personal.flow();
+				}
+
+				cout << "\nDesea seguir haciendo operaciones? \n1. Continuar\n2. Salir \nSeleccione: ";
+				cin >> option;
+				switch(option){
+					case 1:
+						finished=false;
+						break;
+					case 2:
+						break;
+					default:
+						cout << "La opcion seleccionada no es valida, se continuara con el flujo de operaciones" << endl;
+				}
 			}
-			else if(userRole==2){
-				personal.flow();
-		    }
 		}
 
 
@@ -73,9 +96,20 @@ class Inventory{
 			cin.getline(name, sizeof(name));
 			cout << "Ingrese su contrasena: ";
 			cin.getline(password, sizeof(password));
-			cout << "Ingrese el rol del usuario \n";
-			cout << "Admin (0), Vendedor (1), Personal(2): ";
-			cin >> role;
+			while(true){
+				cout << "Ingrese el rol del usuario \n";
+				cout << "Admin (0), Vendedor (1), Personal(2): ";
+				cin >> role;
+				if(role==0 || role==1 || role==2){
+					break;
+				}
+				else{
+					cout << "************************************************" << endl;
+					cout << "El rol ingresado no es valido, intente de nuevo" << endl;
+					cout << "************************************************" << endl;
+				}
+			
+			}
 			
 
 			int id=connection.getLastItemId(DBFile)+1;
@@ -186,6 +220,9 @@ class Inventory{
 			int idCompra = purchaseConnection.getLastItemId(purchaseFile)+1;
 			Compra compra = {idCompra, idProducto, idFactura, cantidadComprada};	
 			purchaseConnection.storeInDB(purchaseFile, compra);
+			cout << "\n*****************************************" << endl;
+			cout << "* Datos de prueba cargados exitosamente *" << endl;
+			cout << "*****************************************" << endl;
 
 		}
 	
