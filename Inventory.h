@@ -50,12 +50,20 @@ class Inventory{
 			
 			bool finished=false;
 			int install;
-			cout << "Desea crear una base de datos de prueba \n (Recomendado para el correcto funcionamiento de instalaciones nuevas): \n";
-			cout << "1. Si \n2. No \nSeleccione: ";
-			cin >> install;
-			if(install==1){
-				cargarDatosDePrueba();
+			while(!finished){
+
+				cout << "Desea crear una base de datos de prueba \n (Recomendado para el correcto funcionamiento de instalaciones nuevas): \n";
+				cout << "1. Si \n2. No \nSeleccione: ";
+				cin >> install;
+				if(install==1){
+					cargarDatosDePrueba();
+					finished=true;
+				}
+				else{ 
+						
+				}
 			}
+			finished=false;
 			
 			while(!finished){	
 				if(userRole==0){
@@ -75,6 +83,7 @@ class Inventory{
 						finished=false;
 						break;
 					case 2:
+						finished=true;
 						break;
 					default:
 						cout << "La opcion seleccionada no es valida, se continuara con el flujo de operaciones" << endl;
@@ -107,6 +116,8 @@ class Inventory{
 					cout << "************************************************" << endl;
 					cout << "El rol ingresado no es valido, intente de nuevo" << endl;
 					cout << "************************************************" << endl;
+
+					cin.ignore();
 				}
 			
 			}
@@ -158,22 +169,33 @@ class Inventory{
 		}
 
 		User welcome(){
+			int option;
 			printf("*************************************** \n");
 			printf("* Bienvenido al sistema de inventario *\n");
 			printf("*************************************** \n");
-			printf("1. Iniciar sesion \n");
-			printf("2. Registrarse \n");
-			printf("Ingrese la opcion deseada (1 o 2): ");
-			int option;
-			cin >> option;
 			User user;
-			switch(option){
-				case 1:
-					user = login();
-					break;
-				case 2:
-					user =signup();
-					break;
+			bool finished= false;
+			while(!finished){	
+				printf("1. Iniciar sesion \n");
+				printf("2. Registrarse \n");
+				printf("Ingrese la opcion deseada (1 o 2): ");
+				cin >> option;
+				switch(option){
+					case 1:
+						user = login();
+						finished=true;
+						break;
+					case 2:
+						user =signup();
+						finished=true;
+						break;
+					default:
+						cout << "************************************************" << endl;
+						cout << "Opcion invalida por favor intente de nuevo" << endl;
+						cout << "************************************************" << endl;
+						
+						break;
+				}
 			}
 			return user;
 
