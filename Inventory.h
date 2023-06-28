@@ -57,11 +57,8 @@ class Inventory{
 				cin >> install;
 				if(install==1){
 					cargarDatosDePrueba();
-					finished=true;
 				}
-				else{ 
-						
-				}
+				finished=true;
 			}
 			finished=false;
 			

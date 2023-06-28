@@ -25,3 +25,6 @@ int Producto::getStock(){
 void Producto::setStock(int stock){
 	this->stock= stock;
 }
+char* Producto::getDescripcion(){
+	return this->descripcion;
+}

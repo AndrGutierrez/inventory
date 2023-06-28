@@ -1,4 +1,60 @@
 id,id_proveedor,stock,precio,descripcion,stock_min
-2,1,15,4.5,"lampara",10				
-3,1,30,50,"mueble",5
-4,1,30,500,"laptop",3
+2,1,15,4.5,lampara,10				
+3,1,30,50,mueble,5
+4,1,30,500,laptop,3
+5,1,20,20,RAM,8
+6,1,60,25,SSD kingstone,10
+7,1,10,300,GPU NVIDIA,4
+8,1,20,20,PSU,5
+9,1,5,112,AIO,2
+10,1,5,100,Case,3
+11,1,5,40,Motheboard asus,4
+12,1,100,40,Ventilador corsair,50
+13,1,100,5,Pasta termica,50
+14,1,100,5,Pad termico,50
+15,1,100,5,Pasta termica Artic MX,50
+16,1,100,5,Pasta termica Noctua,50
+17,1,100,5,Pasta termica Noctua NT-H1,50
+18,1,100,5,Pasta termica Noctua NT-H2,50
+19,1,10,300,GPU AMD sapphire,4
+20,1,10,300,GPU Intel,4
+21,1,20,200,CPU AMD,6
+22,1,20,200,CPU Intel,6
+23,1,5,555,PC prearmada Intel,1
+24,1,5,555,PC prearmada AMD,1
+25,1,5,555,PC prearmada NVIDIA,1
+26,1,30,500,laptop lenovo,3
+27,1,30,500,laptop hp,3
+28,1,30,500,laptop asus,3
+29,1,30,500,laptop MSI,3
+30,1,5,40,Motheboard MSI,4
+31,1,5,40,Motheboard gigabyte,4
+32,1,5,40,Motheboard asrock,4
+33,1,5,40,Motheboard aorus,4
+34,1,5,40,Motheboard NZXT,4
+35,1,5,100,Case Corsair,3
+36,1,5,100,Case asus,3
+37,1,5,100,Case MSI,3
+38,1,5,100,Case NZXT,3
+39,1,5,112,AIO corsair,2
+40,1,5,112,AIO NZXT,2
+41,1,5,112,AIO MSI,2
+42,1,5,112,AIO asus,2
+43,1,5,112,AIO aours,2
+44,1,10,300,GPU AMD MSI,4
+45,1,10,300,GPU AMD asus,4
+46,1,10,300,GPU AMD asrock,4
+47,1,10,300,GPU NVIDIA asus,4
+48,1,10,300,GPU NVIDIA MSI,4
+49,1,10,300,GPU NVIDIA gigabyte,4
+50,1,10,300,GPU NVIDIA aorus,4
+51,1,10,300,GPU NVIDIA EVGA,4
+52,1,10,300,GPU NVIDIA EVGA,4
+53,1,100,40,Ventilador corsair,50
+54,1,100,40,Ventilador asus,50
+55,1,100,40,Ventilador MSI,50
+56,1,100,40,Ventilador MSI,50
+57,1,100,40,Ventilador NZXT,50
+58,1,60,25,SSD Western digital,10
+59,1,60,25,disco mecanico Western digital,10
+60,1,60,25,disco mecanico Kingstone,10
