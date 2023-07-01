@@ -28,3 +28,6 @@ void Producto::setStock(int stock){
 char* Producto::getDescripcion(){
 	return this->descripcion;
 }
+void Producto::setDescripcion(char* descripcion){
+	strcpy(this->descripcion, descripcion);
+}
