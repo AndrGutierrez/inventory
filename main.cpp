@@ -3,6 +3,7 @@
 #include "Sorters.h"
 #include "Search.h"
 #include "MergeSort.h"
+#include "MezclaNatural.h"
 #include <chrono>
 #include <thread>
 #include <functional>
@@ -59,21 +60,24 @@ void clientFlow(){
 		cout << "Seleccione Que Desea Hacer: " << endl;
 		printf("1. Listar\n2. Ordenar y listar\n3. Buscar \nIngrese el Numero de correspondiente a la accion: ");
 		cin >> accion;
+		string filename="db/clientes_ordenados.dat";
 		DBConnection<Client> clientConnection= DBConnection<Client>();
+		string data = clientConnection.selectAll("db/client.dat");
 		switch(accion){
 			case 1:
-				clientConnection.selectAll("db/client.dat");
+				cout << data << endl;
 				break;
 			case 2:
-				mergeSort.run();
-				remove("db/client_copy.dat");
+				mergeSort.run(filename);
+				remove("db/clientes_ordenados.dat");
 				break;
 			case 3:
 				cout << "Ingrese el nombre que quiere buscar: " << endl;
 				cin >> name;
-				mergeSort.run();
-				searcher.runIndexed(name);
-				remove("db/client_copy.dat");
+				mergeSort.run(filename);
+
+				searcher.runIndexed(name, filename);
+				remove(filename.c_str());
 				break;
 			default:
 				cout << "Opcion Invalida" << endl;
@@ -94,10 +98,10 @@ void getUserInput(){
 		cin >> accion;
 		switch(accion){
 			case 1:
-				clientFlow();
+				productFlow();
 				break;
 			case 2:
-				productFlow();
+				clientFlow();
 				break;
 			default:
 				cout << "Opcion Invalida" << endl;
@@ -107,7 +111,10 @@ void getUserInput(){
 }
 
 int main(){
-	DBConnection<Client> clientConnection= DBConnection<Client>();
+	// DBConnection<Client> clientConnection= DBConnection<Client>();
+	// getUserInput();
+	MezclaNatural<Client> mezclaNatural = MezclaNatural<Client>();
+	mezclaNatural.run("db/client_copy.dat");
 	// string data=clientConnection.selectAll("db/client.dat");
 	// cout<<data<<endl;
 	// Inventory inventory;
