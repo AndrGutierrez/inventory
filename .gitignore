@@ -1,3 +1,4 @@
 *.gch
 *.h
 db/*
+aux_files/*
