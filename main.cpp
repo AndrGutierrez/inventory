@@ -30,7 +30,7 @@ void long_operation()
     std::this_thread::sleep_for(150ms);
 }
 
-int calc_time(function<void()> func){
+double calc_time(function<void()> func){
     using std::chrono::high_resolution_clock;
     using std::chrono::duration_cast;
     using std::chrono::duration;
@@ -46,13 +46,60 @@ int calc_time(function<void()> func){
     /* Getting number of milliseconds as a double. */
     duration<double, std::milli> ms_double = t2 - t1;
 
-    std::cout << ms_double.count() << "ms\n";
-    return 0;
+	return ms_double.count();
+}
+vector<Producto> sortProducts(){
+		string productFile="db/product.dat";
+		Sorters sorters;
+		vector<Producto> productos_ordenados; 
+		DBConnection<Producto> productConnection= DBConnection<Producto>();
+		vector<Producto> productos=productConnection.selectAllItems(productFile);
+		int size=productos.size();
+		productos_ordenados=sorters.quicksort(productos, 0, size-1);
+		return productos_ordenados;
+
+}
+
+void productFlow(){
+
+		Search searcher;
+		int index;
+		int accion;
+		string name;
+		cout << "Seleccione Que Desea Hacer: " << endl;
+		printf("1. Listar\n2. Ordenar y listar\n3. Buscar \nIngrese el Numero de correspondiente a la accion: ");
+		cin >> accion;
+		DBConnection<Producto> productConnection= DBConnection<Producto>();
+		string data = productConnection.selectAll("db/product.dat");
+		vector<Producto> productos_ordenados=sortProducts();
+	double time;
+		switch(accion){
+			case 1:
+				cout << data << endl;
+				break;
+			case 2:
+				time = calc_time(sortProducts);
+				for(int i=0; i<productos_ordenados.size(); i++){
+					cout << productos_ordenados[i].getId()<< " " << productos_ordenados[i].getDescripcion() << endl;
+				}
+				cout<<"Tiempo de ejecucion: "<<time<<"ms"<<endl;
+				break;
+			case 3:
+				cout << "Ingrese el nombre que quiere buscar: " << endl;
+				cin >> name;
+				index=searcher.binary(productos_ordenados, name, productos_ordenados.size());
+				cout <<"El producto se encuentra en la posicion: "<< index << endl;
+				break;
+			default:
+				cout << "Opcion Invalida" << endl;
+				break;
+		}
+
 }
 
 void clientFlow(){
 
-		MergeSort<Client> mergeSort;
+		MezclaDirecta<Client> mergeSort;
 		Search searcher;
 		int accion;
 		string name;
@@ -86,10 +133,6 @@ void clientFlow(){
 
 }
 
-void productFlow(){
-
-}
-
 void getUserInput(){
 
 		int accion;
@@ -111,10 +154,11 @@ void getUserInput(){
 }
 
 int main(){
-	// DBConnection<Client> clientConnection= DBConnection<Client>();
-	// getUserInput();
-	MezclaNatural<Client> mezclaNatural = MezclaNatural<Client>();
-	mezclaNatural.run("db/client_copy.dat");
+	// DBConnection<Producto> clientConnection= DBConnection<Producto>();
+	// clientConnection.updateFromCSV("./updatefiles/productos_nuevos.csv");
+	getUserInput();
+	// MezclaNatural<Client> mezclaNatural = MezclaNatural<Client>();
+	// mezclaNatural.run("db/client_copy.dat");
 	// string data=clientConnection.selectAll("db/client.dat");
 	// cout<<data<<endl;
 	// Inventory inventory;
